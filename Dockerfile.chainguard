@@ -12,12 +12,12 @@ LABEL maintainer="mumble-docker" \
 # Install runtime dependencies and Mumble server
 # Note: Package names may differ in Wolfi vs Alpine
 RUN apk add --no-cache \
-    mumble-server \
-    mumble-server-openrc \
-    tmux \
-    busybox \
-    tzdata \
-    ca-certificates
+    mumble-server=1.5.857-r0 \
+    mumble-server-openrc=1.5.857-r0 \
+    tmux=3.6-r0 \
+    su-exec=0.3-r0 \
+    tzdata=2025c-r0 \
+    ca-certificates=20251003-r0
 
 # Create mumble user and group
 RUN addgroup -S mumble && \
