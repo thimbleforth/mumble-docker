@@ -43,7 +43,7 @@ backup: ## Backup Mumble data
 	docker run --rm \
 		-v mumble-data:/data \
 		-v $(PWD)/backups:/backup \
-		alpine tar czf /backup/mumble-data-$(shell date +%Y%m%d-%H%M%S).tar.gz /data
+		alpine:3.23 tar czf /backup/mumble-data-$(shell date +%Y%m%d-%H%M%S).tar.gz /data
 	@echo "Backup created in backups/ directory"
 
 restore: ## Restore from backup (use BACKUP_FILE=path/to/backup.tar.gz)
@@ -51,7 +51,7 @@ restore: ## Restore from backup (use BACKUP_FILE=path/to/backup.tar.gz)
 	docker run --rm \
 		-v mumble-data:/data \
 		-v $(PWD)/backups:/backup \
-		alpine tar xzf /backup/$(BACKUP_FILE) -C /
+		alpine:3.23 tar xzf /backup/$(BACKUP_FILE) -C /
 	@echo "Backup restored from $(BACKUP_FILE)"
 
 test: ## Run basic tests
@@ -63,7 +63,7 @@ scan: ## Scan image for vulnerabilities (requires trivy)
 	trivy image mumble-server:latest
 
 update: ## Pull latest base images and rebuild
-	docker pull alpine:latest
+	docker pull alpine:3.23
 	docker-compose build --pull
 	docker-compose up -d
 
