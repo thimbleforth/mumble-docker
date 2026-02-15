@@ -1,6 +1,9 @@
 # Docker files
 .dockerignore
 
+# Environment files
+.env
+
 # Volume data (if mounted locally)
 data/
 logs/

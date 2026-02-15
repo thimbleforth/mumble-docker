@@ -30,7 +30,29 @@ This repository provides two Dockerfile options:
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Using Make (Recommended for Development)
+
+If you have `make` installed, you can use the provided Makefile:
+
+```bash
+# Show all available commands
+make help
+
+# Build and start the server
+make build
+make up
+
+# View logs
+make logs
+
+# Stop the server
+make down
+
+# Backup data
+make backup
+```
+
+### Using Docker Compose
 
 1. Clone this repository:
 ```bash
