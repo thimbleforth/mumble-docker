@@ -8,7 +8,6 @@ This document describes the security measures implemented in this Mumble Docker 
 
 **Standard Dockerfile:**
 - Uses official Alpine Linux as the base image
-- Multi-stage build to minimize final image size
 - Regularly updated Alpine packages
 
 **Chainguard Dockerfile:**
@@ -73,10 +72,10 @@ Resource limits are enforced to prevent DoS attacks:
 
 ### 10. Build Security
 
-- Multi-stage build separates build and runtime environments
 - Minimal runtime dependencies
 - No build tools in final image
 - CA certificates included for secure communications
+- Pinned package versions for reproducibility
 
 ## Best Practices for Deployment
 
@@ -113,7 +112,7 @@ Regularly backup the volumes:
 docker run --rm \
   -v mumble-data:/data \
   -v $(pwd)/backups:/backup \
-  alpine tar czf /backup/mumble-data-$(date +%Y%m%d).tar.gz /data
+  alpine:3.23 tar czf /backup/mumble-data-$(date +%Y%m%d).tar.gz /data
 ```
 
 ### 5. Network Isolation

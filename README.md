@@ -124,6 +124,11 @@ docker run -d \
 ### Environment Variables
 
 - `TZ`: Timezone (default: UTC)
+- `ENABLE_TMUX`: Enable tmux multiplexer for console interaction (default: disabled)
+  - Set to `1` or `true` to run Mumble server inside a tmux session
+  - Useful for console interaction with the running server
+  - When enabled, attach to the session with: `docker exec -it mumble-server tmux attach -t mumble-server`
+  - Note: Disabled by default for better signal handling and simpler container operation
 
 ## Volumes
 
