@@ -15,7 +15,7 @@ serverpassword=
 users=50
 
 # Maximum bandwidth per client (in bits per second)
-# Recommended: 40000-90000 (5-11 KB/s). Higher quality = more bandwidth
+# Recommended: 40000-90000 (5-11.25 KB/s). Higher quality = more bandwidth
 bandwidth=90000
 
 # Welcome text sent to clients when they connect
