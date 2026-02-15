@@ -12,11 +12,11 @@ LABEL maintainer="mumble-docker" \
 RUN apk add --no-cache \
     mumble-server=1.5.857-r0 \
     mumble-server-openrc=1.5.857-r0 \
-    tmux=3.6a-r1 \
+    tmux=3.6-r0 \
     su-exec=0.3-r0 \
     tzdata=2025c-r0 \
     ca-certificates=20251003-r0
-
+    
 # Create mumble user and group
 RUN addgroup -S mumble && \
     adduser -S -D -H -h /var/lib/mumble-server -s /sbin/nologin -G mumble -g mumble mumble
