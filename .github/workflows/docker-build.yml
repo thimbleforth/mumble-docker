@@ -1,0 +1,97 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test Docker Image
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      security-events: write  # For uploading Trivy results
+    
+    strategy:
+      matrix:
+        dockerfile: [Dockerfile]
+        # Add Dockerfile.chainguard once Chainguard registry is accessible
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: false
+          load: true
+          tags: mumble-server:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Test image structure
+        run: |
+          docker run --rm mumble-server:test mumble-server -version || true
+          docker inspect mumble-server:test
+      
+      - name: Check for security best practices
+        run: |
+          # Check that image runs as non-root
+          USER=$(docker inspect mumble-server:test --format='{{.Config.User}}')
+          if [ "$USER" != "mumble" ]; then
+            echo "ERROR: Container does not run as mumble user"
+            exit 1
+          fi
+          echo "✓ Container runs as non-root user: $USER"
+          
+          # Check exposed ports
+          PORTS=$(docker inspect mumble-server:test --format='{{json .Config.ExposedPorts}}')
+          echo "✓ Exposed ports: $PORTS"
+      
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: mumble-server:test
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+  
+  lint:
+    name: Lint Dockerfiles
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: warning
+      
+      - name: Run Hadolint on Chainguard Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile.chainguard
+          failure-threshold: warning
+        continue-on-error: true

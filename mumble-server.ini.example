@@ -1,0 +1,32 @@
+# Example Mumble Server Configuration
+# This file should be placed in /etc/mumble-server/mumble-server.ini inside the container
+# or mounted via volume
+
+# Database location
+database=/var/lib/mumble-server/mumble-server.sqlite
+
+# Port to bind to (default 64738)
+port=64738
+
+# Password to join the server (leave empty for no password)
+serverpassword=
+
+# Maximum number of clients
+users=50
+
+# Maximum bandwidth per client (in bits per second)
+# Recommended: 40000-90000 (5-11.25 KB/s). Higher quality = more bandwidth
+bandwidth=90000
+
+# Welcome text sent to clients when they connect
+welcometext="<br />Welcome to this Mumble server running in Docker!<br />"
+
+# Server name
+registername=Mumble Server
+
+# Enable logging
+logfile=/var/log/mumble-server/mumble-server.log
+
+# SSL certificate and key (auto-generated if not provided)
+sslCert=/var/lib/mumble-server/mumble-server.crt
+sslKey=/var/lib/mumble-server/mumble-server.key
