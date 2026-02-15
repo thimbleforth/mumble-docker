@@ -68,4 +68,4 @@ update: ## Pull latest base images and rebuild
 	docker-compose up -d
 
 version: ## Show Mumble version
-	docker run --rm mumble-server:latest murmurd -version 2>&1 || echo "Image not built yet"
+	docker run --rm mumble-server:latest mumble-server -version 2>&1 || echo "Image not built yet"

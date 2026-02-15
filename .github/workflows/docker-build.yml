@@ -12,6 +12,10 @@ jobs:
     name: Build and Test Docker Image
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+      security-events: write  # For uploading Trivy results
+    
     strategy:
       matrix:
         dockerfile: [Dockerfile]
@@ -36,7 +40,7 @@ jobs:
       
       - name: Test image structure
         run: |
-          docker run --rm mumble-server:test murmurd -version || true
+          docker run --rm mumble-server:test mumble-server -version || true
           docker inspect mumble-server:test
       
       - name: Check for security best practices
@@ -70,6 +74,9 @@ jobs:
   lint:
     name: Lint Dockerfiles
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code

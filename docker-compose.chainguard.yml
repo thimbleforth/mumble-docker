@@ -15,9 +15,9 @@ services:
     
     # Persistent volumes for configuration and data
     volumes:
-      - mumble-data:/var/lib/murmur
-      - mumble-config:/etc/murmur
-      - mumble-logs:/var/log/murmur
+      - mumble-data:/var/lib/mumble-server
+      - mumble-config:/etc/mumble-server
+      - mumble-logs:/var/log/mumble-server
     
     # Environment variables (optional - can be customized)
     environment:

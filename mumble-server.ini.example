@@ -1,9 +1,9 @@
 # Example Mumble Server Configuration
-# This file should be placed in /etc/murmur/murmur.ini inside the container
+# This file should be placed in /etc/mumble-server/mumble-server.ini inside the container
 # or mounted via volume
 
 # Database location
-database=/var/lib/murmur/murmur.sqlite
+database=/var/lib/mumble-server/mumble-server.sqlite
 
 # Port to bind to (default 64738)
 port=64738
@@ -24,8 +24,8 @@ welcometext="<br />Welcome to this Mumble server running in Docker!<br />"
 registername=Mumble Server
 
 # Enable logging
-logfile=/var/log/murmur/murmur.log
+logfile=/var/log/mumble-server/mumble-server.log
 
 # SSL certificate and key (auto-generated if not provided)
-sslCert=/var/lib/murmur/murmur.crt
-sslKey=/var/lib/murmur/murmur.key
+sslCert=/var/lib/mumble-server/mumble-server.crt
+sslKey=/var/lib/mumble-server/mumble-server.key

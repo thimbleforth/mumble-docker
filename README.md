@@ -93,9 +93,9 @@ docker run -d \
   --name mumble-server \
   -p 64738:64738/tcp \
   -p 64738:64738/udp \
-  -v mumble-data:/var/lib/murmur \
-  -v mumble-config:/etc/murmur \
-  -v mumble-logs:/var/log/murmur \
+  -v mumble-data:/var/lib/mumble-server \
+  -v mumble-config:/etc/mumble-server \
+  -v mumble-logs:/var/log/mumble-server \
   mumble-server
 ```
 
@@ -105,7 +105,7 @@ docker run -d \
 
 1. Create a configuration file based on the example:
 ```bash
-cp murmur.ini.example murmur.ini
+cp mumble-server.ini.example mumble-server.ini
 ```
 
 2. Edit the configuration file to your preferences
@@ -116,8 +116,8 @@ docker run -d \
   --name mumble-server \
   -p 64738:64738/tcp \
   -p 64738:64738/udp \
-  -v $(pwd)/murmur.ini:/etc/murmur/murmur.ini \
-  -v mumble-data:/var/lib/murmur \
+  -v $(pwd)/mumble-server.ini:/etc/mumble-server/mumble-server.ini \
+  -v mumble-data:/var/lib/mumble-server \
   mumble-server
 ```
 
@@ -129,9 +129,9 @@ docker run -d \
 
 The container uses three persistent volumes:
 
-- `/var/lib/murmur`: Server database and SSL certificates
-- `/etc/murmur`: Configuration files
-- `/var/log/murmur`: Server logs
+- `/var/lib/mumble-server`: Server database and SSL certificates
+- `/etc/mumble-server`: Configuration files
+- `/var/log/mumble-server`: Server logs
 
 ## Ports
 
