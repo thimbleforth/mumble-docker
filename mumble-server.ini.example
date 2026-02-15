@@ -12,10 +12,11 @@ port=64738
 serverpassword=
 
 # Maximum number of clients
-users=100
+users=50
 
 # Maximum bandwidth per client (in bits per second)
-bandwidth=72000
+# Recommended: 40000-90000 (5-11 KB/s). Higher quality = more bandwidth
+bandwidth=90000
 
 # Welcome text sent to clients when they connect
 welcometext="<br />Welcome to this Mumble server running in Docker!<br />"

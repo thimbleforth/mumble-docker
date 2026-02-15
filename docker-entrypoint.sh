@@ -24,7 +24,15 @@ else
     log "WARNING: Data directory is not writable!"
 fi
 
-log "Starting Mumble server (mumble-server)..."
+log "Starting Mumble server (mumble-server) in tmux session..."
 
-# Execute the CMD passed to the container
-exec "$@"
+# Check if tmux is available
+if command -v tmux >/dev/null 2>&1; then
+    # Start tmux session in detached mode with the mumble server
+    # Session name: mumble-server
+    exec tmux new-session -d -s mumble-server "$@" \; attach-session -t mumble-server
+else
+    log "WARNING: tmux not found, starting without multiplexer"
+    # Execute the CMD passed to the container
+    exec "$@"
+fi

@@ -12,6 +12,7 @@ LABEL maintainer="mumble-docker" \
 RUN apk add --no-cache \
     mumble-server \
     mumble-server-openrc \
+    tmux \
     su-exec \
     tzdata \
     ca-certificates

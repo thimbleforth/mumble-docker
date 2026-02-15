@@ -122,16 +122,16 @@ mumble-docker/
 
 ```bash
 # Build the image
-make build
+docker build -t mumble-server .
 
 # Start the server
-make up
+docker-compose up -d
 
 # Check logs
-make logs
+docker-compose logs -f
 
-# Run security scan
-make scan
+# Run security scan (requires trivy)
+trivy image mumble-server
 ```
 
 ### Manual Testing
