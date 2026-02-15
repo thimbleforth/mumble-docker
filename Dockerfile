@@ -11,6 +11,7 @@ LABEL maintainer="mumble-docker" \
 # Install runtime dependencies and Mumble server
 RUN apk add --no-cache \
     mumble-server \
+    mumble-server-openrc \
     su-exec \
     tzdata \
     ca-certificates

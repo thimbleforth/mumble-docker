@@ -13,6 +13,7 @@ LABEL maintainer="mumble-docker" \
 # Note: Package names may differ in Wolfi vs Alpine
 RUN apk add --no-cache \
     mumble-server \
+    mumble-server-openrc \
     busybox \
     tzdata \
     ca-certificates
