@@ -19,9 +19,9 @@ RUN apk add --no-cache \
     tzdata \
     ca-certificates
 
-# Create mumble user and group if they don't exist
-RUN addgroup -S mumble 2>/dev/null || true && \
-    adduser -S -D -H -h /var/lib/mumble-server -s /sbin/nologin -G mumble -g mumble mumble 2>/dev/null || true
+# Create mumble user and group
+RUN addgroup -S mumble && \
+    adduser -S -D -H -h /var/lib/mumble-server -s /sbin/nologin -G mumble -g mumble mumble
 
 # Create necessary directories with appropriate permissions
 RUN mkdir -p /var/lib/mumble-server /var/log/mumble-server /etc/mumble-server && \

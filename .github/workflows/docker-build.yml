@@ -34,6 +34,7 @@ jobs:
           context: .
           file: ${{ matrix.dockerfile }}
           push: false
+          load: true
           tags: mumble-server:test
           cache-from: type=gha
           cache-to: type=gha,mode=max

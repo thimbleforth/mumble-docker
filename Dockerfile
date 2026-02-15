@@ -1,7 +1,7 @@
 # Hardened Mumble VOIP Server Dockerfile
 # Uses official Alpine Linux as base image with security hardening
 
-FROM alpine:latest
+FROM alpine:3.23
 
 # Add metadata labels
 LABEL maintainer="mumble-docker" \
@@ -10,16 +10,16 @@ LABEL maintainer="mumble-docker" \
 
 # Install runtime dependencies and Mumble server
 RUN apk add --no-cache \
-    mumble-server \
-    mumble-server-openrc \
-    tmux \
-    su-exec \
-    tzdata \
-    ca-certificates
+    mumble-server=1.5.857-r0 \
+    mumble-server-openrc=1.5.857-r0 \
+    tmux=3.6a-r1 \
+    su-exec=0.3-r0 \
+    tzdata=2025c-r0 \
+    ca-certificates=20251003-r0
 
-# Create mumble user and group if they don't exist
-RUN addgroup -S mumble 2>/dev/null || true && \
-    adduser -S -D -H -h /var/lib/mumble-server -s /sbin/nologin -G mumble -g mumble mumble 2>/dev/null || true
+# Create mumble user and group
+RUN addgroup -S mumble && \
+    adduser -S -D -H -h /var/lib/mumble-server -s /sbin/nologin -G mumble -g mumble mumble
 
 # Create necessary directories with appropriate permissions
 RUN mkdir -p /var/lib/mumble-server /var/log/mumble-server /etc/mumble-server && \
