@@ -12,7 +12,7 @@ LABEL maintainer="mumble-docker" \
 RUN apk add --no-cache \
     mumble-server=1.5.857-r0 \
     mumble-server-openrc=1.5.857-r0 \
-    tmux=3.6a-r1 \
+    tmux=3.6-r0 \
     tzdata=2025c-r0 \
     ca-certificates=20251003-r0
     
