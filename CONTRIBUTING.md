@@ -106,7 +106,7 @@ mumble-docker/
 ├── docker-compose.yml            # Standard compose file
 ├── docker-compose.chainguard.yml # Chainguard compose file
 ├── docker-entrypoint.sh          # Container entrypoint script
-├── murmur.ini.example            # Example configuration
+├── mumble-server.ini.example     # Example configuration
 ├── .env.example                  # Environment variables example
 ├── Makefile                      # Build and management commands
 ├── README.md                     # User documentation

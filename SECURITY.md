@@ -29,9 +29,9 @@ This document describes the security measures implemented in this Mumble Docker 
 
 - **Read-only root filesystem**: Enabled in docker-compose.yml
 - **Specific write permissions**: Only on necessary directories:
-  - `/var/lib/murmur`: Database and certificates
-  - `/etc/murmur`: Configuration files
-  - `/var/log/murmur`: Log files
+  - `/var/lib/mumble-server`: Database and certificates
+  - `/etc/mumble-server`: Configuration files
+  - `/var/log/mumble-server`: Log files
   - `/tmp` and `/run`: Temporary files (tmpfs)
 
 ### 4. Capability Restrictions
