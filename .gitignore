@@ -1,0 +1,22 @@
+# Docker files
+.dockerignore
+
+# Volume data (if mounted locally)
+data/
+logs/
+config/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
