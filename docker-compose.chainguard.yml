@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mumble-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.chainguard
+    container_name: mumble-server
+    restart: unless-stopped
+    
+    # Port mappings - Mumble uses 64738 for both TCP and UDP
+    ports:
+      - "64738:64738/tcp"
+      - "64738:64738/udp"
+    
+    # Persistent volumes for configuration and data
+    volumes:
+      - mumble-data:/var/lib/murmur
+      - mumble-config:/etc/murmur
+      - mumble-logs:/var/log/murmur
+    
+    # Environment variables (optional - can be customized)
+    environment:
+      - TZ=UTC
+    
+    # Security options for container hardening
+    security_opt:
+      - no-new-privileges:true
+    
+    # Read-only root filesystem (except for volumes)
+    read_only: true
+    
+    # Temporary filesystem for runtime files
+    tmpfs:
+      - /tmp
+      - /run
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 128M
+
+# Named volumes for persistence
+volumes:
+  mumble-data:
+    driver: local
+  mumble-config:
+    driver: local
+  mumble-logs:
+    driver: local

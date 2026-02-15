@@ -1,24 +1,27 @@
+# Alternative Dockerfile using Chainguard Images for Maximum Hardening
+# This version uses Chainguard's minimal, secure base images
+# Note: Requires access to cgr.dev registry
+
 # Stage 1: Build stage using official Alpine Linux
 FROM alpine:latest AS builder
 
 # Install Mumble server packages
-# Note: murmur is the server component of Mumble
-RUN apk add --no-cache \
-    murmur
+RUN apk add --no-cache murmur
 
-# Stage 2: Final stage for hardened production deployment
-# Note: For maximum hardening in production, use Dockerfile.chainguard instead
-FROM alpine:latest
+# Stage 2: Final stage using Chainguard Wolfi-base for hardening
+# Wolfi is a minimal Linux distribution designed for containers
+FROM cgr.dev/chainguard/wolfi-base:latest
 
 # Add metadata labels
 LABEL maintainer="mumble-docker" \
-      description="Hardened Mumble VOIP Server container" \
+      description="Hardened Mumble VOIP Server container using Chainguard images" \
       version="1.0"
 
 # Install runtime dependencies and Mumble server
+# Note: Package names may differ in Wolfi vs Alpine
 RUN apk add --no-cache \
     murmur \
-    su-exec \
+    busybox \
     tzdata \
     ca-certificates
 

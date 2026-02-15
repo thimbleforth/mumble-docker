@@ -4,11 +4,29 @@ A hardened Docker container for the Mumble VOIP server using Alpine Linux and Ch
 
 ## Features
 
-- **Multi-stage build**: Uses official Alpine Linux for building and Chainguard Alpine for the final image
+- **Multi-stage build**: Uses official Alpine Linux for building and Alpine/Chainguard for the final image
 - **Hardened container**: Non-root user, read-only filesystem, no new privileges, resource limits
 - **Persistent storage**: Volume mounts for configuration, data, and logs
 - **Health checks**: Built-in health monitoring
 - **Easy deployment**: Docker Compose configuration included
+- **Multiple Dockerfile options**: Standard Alpine or Chainguard for maximum security
+
+## Dockerfile Options
+
+This repository provides two Dockerfile options:
+
+### Standard Dockerfile (Default)
+- **File**: `Dockerfile`
+- **Base Image**: Alpine Linux (official)
+- **Best For**: General use, standard deployments
+- **Build**: `docker build -t mumble-server .`
+
+### Chainguard Dockerfile (Maximum Security)
+- **File**: `Dockerfile.chainguard`
+- **Base Image**: Chainguard Wolfi-base
+- **Best For**: Production environments requiring maximum security and minimal attack surface
+- **Build**: `docker build -f Dockerfile.chainguard -t mumble-server .`
+- **Note**: Requires access to Chainguard registry at `cgr.dev`
 
 ## Quick Start
 
@@ -23,6 +41,11 @@ cd mumble-docker
 2. Build and start the container:
 ```bash
 docker-compose up -d
+```
+
+   Or to use the Chainguard Dockerfile:
+```bash
+docker-compose -f docker-compose.chainguard.yml up -d
 ```
 
 3. Check the logs:
