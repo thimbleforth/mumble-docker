@@ -1,10 +1,10 @@
 # Mumble Docker
 
-A hardened Docker container for the Mumble VOIP server using Alpine Linux and Chainguard Alpine base images.
+A hardened Docker container for the Mumble VOIP server using Alpine Linux and Chainguard Wolfi base images.
 
 ## Features
 
-- **Multi-stage build**: Uses official Alpine Linux for building and Alpine/Chainguard for the final image
+- **Simplified build**: Uses official Alpine Linux or Chainguard Wolfi for the final image
 - **Hardened container**: Non-root user, read-only filesystem, no new privileges, resource limits
 - **Persistent storage**: Volume mounts for configuration, data, and logs
 - **Health checks**: Built-in health monitoring
@@ -146,7 +146,7 @@ This container implements several security best practices:
 - **Read-only filesystem**: Root filesystem is read-only except for mounted volumes
 - **No new privileges**: Prevents privilege escalation
 - **Resource limits**: CPU and memory limits defined
-- **Minimal base image**: Uses Chainguard Alpine for reduced attack surface
+- **Minimal base image**: Uses Chainguard Wolfi for reduced attack surface
 - **Health checks**: Monitors server availability
 
 ## License

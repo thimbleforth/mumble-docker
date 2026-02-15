@@ -1,13 +1,6 @@
-# Stage 1: Build stage using official Alpine Linux
-FROM alpine:latest AS builder
+# Hardened Mumble VOIP Server Dockerfile
+# Uses official Alpine Linux as base image with security hardening
 
-# Install Mumble server packages
-# Note: murmur is the server component of Mumble
-RUN apk add --no-cache \
-    murmur
-
-# Stage 2: Final stage for hardened production deployment
-# Note: For maximum hardening in production, use Dockerfile.chainguard instead
 FROM alpine:latest
 
 # Add metadata labels

@@ -2,14 +2,6 @@
 # This version uses Chainguard's minimal, secure base images
 # Note: Requires access to cgr.dev registry
 
-# Stage 1: Build stage using official Alpine Linux
-FROM alpine:latest AS builder
-
-# Install Mumble server packages
-RUN apk add --no-cache murmur
-
-# Stage 2: Final stage using Chainguard Wolfi-base for hardening
-# Wolfi is a minimal Linux distribution designed for containers
 FROM cgr.dev/chainguard/wolfi-base:latest
 
 # Add metadata labels
